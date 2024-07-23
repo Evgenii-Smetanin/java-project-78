@@ -12,7 +12,7 @@ class TestValidator {
 
     @BeforeEach
     void init() {
-        Validator v = new Validator();
+        v = new Validator();
     }
 
     @Test
