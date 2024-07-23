@@ -1,7 +1,6 @@
 package hexlet.code.schemas;
 
-public class NumberSchema {
-    private boolean requiredFlg;
+public class NumberSchema extends BaseSchema<Integer> {
     private boolean positiveFlg;
     private boolean rangeFlg;
 
@@ -9,17 +8,11 @@ public class NumberSchema {
     private int max;
 
     public NumberSchema() {
-        requiredFlg = false;
         positiveFlg = false;
         rangeFlg = false;
 
         min = 0;
         max = 0;
-    }
-
-    public NumberSchema required() {
-        requiredFlg = true;
-        return this;
     }
 
     public NumberSchema positive() {
@@ -38,8 +31,9 @@ public class NumberSchema {
         return this;
     }
 
+    @Override
     public boolean isValid(Integer num) {
-        if (requiredFlg && num == null) {
+        if (!super.isValid(num)) {
             return false;
         }
 
