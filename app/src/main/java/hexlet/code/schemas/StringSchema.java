@@ -32,7 +32,7 @@ public class StringSchema {
     }
 
     public StringSchema contains(String s) {
-        if (substring.isEmpty()) {
+        if (s.isEmpty()) {
             throw new IllegalArgumentException("Substring must be non-null and have a length of > 0");
         }
 
@@ -42,15 +42,15 @@ public class StringSchema {
     }
 
     public boolean isValid(String string) {
-        if (requiredFlg && string.isEmpty()) {
+        if (requiredFlg && (string == null || string.isEmpty())) {
             return false;
         }
 
-        if (minLengthFlg && (string.isEmpty() || string.length() < minLength)) {
+        if (minLengthFlg && (string == null || string.isEmpty() || string.length() < minLength)) {
             return false;
         }
 
-        if (substringFlg && (string.isEmpty() || !string.contains(substring))) {
+        if (substringFlg && (string == null || string.isEmpty() || !string.contains(substring))) {
             return false;
         }
         return true;
