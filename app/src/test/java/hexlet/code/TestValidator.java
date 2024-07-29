@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestValidator {
-    Validator v;
+    private Validator v;
 
     @BeforeEach
     void init() {

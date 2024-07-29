@@ -8,8 +8,8 @@ public class BaseSchema<T> {
     }
 
     /**
-     * required().
-     * @return BaseSchema<T>
+     * Выполняет проверку переданного объекта в соответствии со схемой валидации.
+     * @return true, если проверка пройдена, иначе false.
      */
     public BaseSchema<T> required() {
         requiredFlg = true;
@@ -17,9 +17,9 @@ public class BaseSchema<T> {
     }
 
     /**
-     * isValid.
-     * @return boolean
-     * @param obj - T
+     * добавляет в схему валидации проверку валидируемого объекта на null.
+     * @return объект схемы.
+     * @param obj - валидируемый объект.
      */
     public boolean isValid(T obj) {
         if (requiredFlg && obj == null) {

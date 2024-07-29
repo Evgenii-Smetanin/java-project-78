@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.Map;
 
-public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
+public final class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
     private boolean sizeOfFlg;
     private boolean schemasFlg;
 
@@ -16,22 +16,12 @@ public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
         schemas = null;
     }
 
-    /**
-     * sizeof.
-     * @param mapSize - int
-     * @return MapSchema<K, V>
-     */
     public MapSchema<K, V> sizeof(int mapSize) {
         sizeOfFlg = true;
         size = mapSize;
         return this;
     }
 
-    /**
-     * shape.
-     * @param schemaMap - Map<String, BaseSchema<String>>
-     * @return MapSchema<K, V>
-     */
     public MapSchema<K, V> shape(Map<String, BaseSchema<String>> schemaMap) {
         if (schemaMap == null) {
             throw new IllegalArgumentException("Schema must be non-null");
@@ -42,20 +32,12 @@ public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
         return this;
     }
 
-    /**
-     * required.
-     * @return MapSchema<K, V>
-     */
     @Override
     public MapSchema<K, V> required() {
         super.required();
         return this;
     }
 
-    /**
-     * isValid.
-     * @return boolean
-     */
     @Override
     public boolean isValid(Map<K, V> map) {
         if (!super.isValid(map)) {
@@ -67,7 +49,7 @@ public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
         }
 
         var wrapper = new Object() {
-            public Boolean result = true;
+            private Boolean result = true;
         };
 
         if (schemasFlg && map != null) {
