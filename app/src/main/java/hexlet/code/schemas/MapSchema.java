@@ -44,7 +44,7 @@ public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
             return false;
         }
 
-        if (sizeOfFlg && (map == null || map.size() != size)) {
+        if (sizeOfFlg && map != null && map.size() != size) {
             return false;
         }
 

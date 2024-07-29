@@ -60,16 +60,18 @@ class TestValidator {
         assertTrue(schema.isValid(10));
         assertFalse(schema.isValid(4));
         assertFalse(schema.isValid(11));
+
+        schema = v.number();
+        schema.range(5, 10);
+        assertTrue(schema.isValid(null));
     }
 
     @Test
     void testMap() {
         MapSchema<String, String> schema = v.map();
-
         assertTrue(schema.isValid(null));
 
         schema.required();
-
         assertFalse(schema.isValid(null));
         assertTrue(schema.isValid(new HashMap<>()));
         Map<String, String> data = new HashMap<>();
@@ -77,10 +79,13 @@ class TestValidator {
         assertTrue(schema.isValid(data));
 
         schema.sizeof(2);
-
         assertFalse(schema.isValid(data));
         data.put("key2", "value2");
         assertTrue(schema.isValid(data));
+
+        schema = v.map();
+        schema.sizeof(2);
+        assertTrue(schema.isValid(null));
     }
 
     @Test

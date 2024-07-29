@@ -47,7 +47,7 @@ public class NumberSchema extends BaseSchema<Integer> {
             return false;
         }
 
-        if (rangeFlg && (num == null || num < min || num > max)) {
+        if (rangeFlg && num != null && (num < min || num > max)) {
             return false;
         }
 
