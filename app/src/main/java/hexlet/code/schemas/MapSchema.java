@@ -33,6 +33,12 @@ public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
     }
 
     @Override
+    public MapSchema<K, V> required() {
+        super.required();
+        return this;
+    }
+
+    @Override
     public boolean isValid(Map<K, V> map) {
         if (!super.isValid(map)) {
             return false;

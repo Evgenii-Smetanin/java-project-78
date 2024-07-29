@@ -32,6 +32,12 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     @Override
+    public NumberSchema required() {
+        super.required();
+        return this;
+    }
+
+    @Override
     public boolean isValid(Integer num) {
         if (!super.isValid(num)) {
             return false;
