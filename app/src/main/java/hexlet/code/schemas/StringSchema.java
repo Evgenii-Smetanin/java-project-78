@@ -35,6 +35,12 @@ public class StringSchema extends BaseSchema<String> {
     }
 
     @Override
+    public StringSchema required() {
+        super.required();
+        return this;
+    }
+
+    @Override
     public boolean isValid(String string) {
         if (!super.isValid(string)) {
             return false;
@@ -52,6 +58,7 @@ public class StringSchema extends BaseSchema<String> {
         if (substringFlg && (string == null || string.isEmpty() || !string.contains(substring))) {
             return false;
         }
+
         return true;
     }
 }
