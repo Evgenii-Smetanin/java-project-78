@@ -14,6 +14,11 @@ public class StringSchema extends BaseSchema<String> {
         substring = "";
     }
 
+    /**
+     * minLength.
+     * @param min - int
+     * @return StringSchema
+     */
     public StringSchema minLength(int min) {
         if (min <= 0) {
             throw new IllegalArgumentException("Minimal length must be > 0");
@@ -24,6 +29,11 @@ public class StringSchema extends BaseSchema<String> {
         return this;
     }
 
+    /**
+     * contains.
+     * @param s - String
+     * @return StringSchema
+     */
     public StringSchema contains(String s) {
         if (s.isEmpty()) {
             throw new IllegalArgumentException("Substring must be non-null and have a length of > 0");
@@ -34,12 +44,21 @@ public class StringSchema extends BaseSchema<String> {
         return this;
     }
 
+    /**
+     * required.
+     * @return StringSchema
+     */
     @Override
     public StringSchema required() {
         super.required();
         return this;
     }
 
+    /**
+     * minLength.
+     * @param string - String
+     * @return boolean
+     */
     @Override
     public boolean isValid(String string) {
         if (!super.isValid(string)) {

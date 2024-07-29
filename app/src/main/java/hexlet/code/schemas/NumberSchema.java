@@ -15,11 +15,21 @@ public class NumberSchema extends BaseSchema<Integer> {
         max = 0;
     }
 
+    /**
+     * positive.
+     * @return NumberSchema
+     */
     public NumberSchema positive() {
         positiveFlg = true;
         return this;
     }
 
+    /**
+     * range.
+     * @param minimum - int
+     * @param maximum - int
+     * @return NumberSchema
+     */
     public NumberSchema range(int minimum, int maximum) {
         if (minimum > maximum) {
             throw new IllegalArgumentException("Min value should be <= max value");
@@ -31,12 +41,20 @@ public class NumberSchema extends BaseSchema<Integer> {
         return this;
     }
 
+    /**
+     * required.
+     * @return NumberSchema
+     */
     @Override
     public NumberSchema required() {
         super.required();
         return this;
     }
 
+    /**
+     * isValid.
+     * @return boolean
+     */
     @Override
     public boolean isValid(Integer num) {
         if (!super.isValid(num)) {
