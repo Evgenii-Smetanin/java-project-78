@@ -1,17 +1,7 @@
 package hexlet.code.schemas;
 
 public final class StringSchema extends BaseSchema<String> {
-    private boolean minLengthFlg;
-    private boolean substringFlg;
-
-    private int minLength;
-    private String substring;
-
     public StringSchema() {
-        minLengthFlg = false;
-        substringFlg = false;
-        minLength = 0;
-        substring = "";
     }
 
     public StringSchema minLength(int min) {
@@ -19,8 +9,11 @@ public final class StringSchema extends BaseSchema<String> {
             throw new IllegalArgumentException("Minimal length must be > 0");
         }
 
-        minLengthFlg = true;
-        minLength = min;
+        addCheck(
+                "minLength",
+                value -> value == null || value.length() >= min
+        );
+
         return this;
     }
 
@@ -29,36 +22,21 @@ public final class StringSchema extends BaseSchema<String> {
             throw new IllegalArgumentException("Substring must be non-null and have a length of > 0");
         }
 
-        substringFlg = true;
-        substring = s;
+        addCheck(
+                "contains",
+                value -> value == null || value.contains(s)
+        );
+
         return this;
     }
 
     @Override
     public StringSchema required() {
-        super.required();
+        addCheck(
+                "required",
+                value -> value != null && !value.isEmpty()
+        );
+
         return this;
-    }
-
-    @Override
-    public boolean isValid(String string) {
-        if (!super.isValid(string)) {
-            return false;
-        }
-
-        if (requiredFlg && string.isEmpty()
-        ) {
-            return false;
-        }
-
-        if (minLengthFlg && (string == null || string.isEmpty() || string.length() < minLength)) {
-            return false;
-        }
-
-        if (substringFlg && (string == null || string.isEmpty() || !string.contains(substring))) {
-            return false;
-        }
-
-        return true;
     }
 }

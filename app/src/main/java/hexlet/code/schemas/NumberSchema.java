@@ -1,22 +1,15 @@
 package hexlet.code.schemas;
 
 public final class NumberSchema extends BaseSchema<Integer> {
-    private boolean positiveFlg;
-    private boolean rangeFlg;
-
-    private int min;
-    private int max;
-
     public NumberSchema() {
-        positiveFlg = false;
-        rangeFlg = false;
-
-        min = 0;
-        max = 0;
     }
 
     public NumberSchema positive() {
-        positiveFlg = true;
+        addCheck(
+                "positive",
+                value -> value == null || value > 0
+        );
+
         return this;
     }
 
@@ -25,32 +18,11 @@ public final class NumberSchema extends BaseSchema<Integer> {
             throw new IllegalArgumentException("Min value should be <= max value");
         }
 
-        rangeFlg = true;
-        min = minimum;
-        max = maximum;
+        addCheck(
+                "range",
+                value -> value == null || value >= minimum && value <= maximum
+        );
+
         return this;
-    }
-
-    @Override
-    public NumberSchema required() {
-        super.required();
-        return this;
-    }
-
-    @Override
-    public boolean isValid(Integer num) {
-        if (!super.isValid(num)) {
-            return false;
-        }
-
-        if (positiveFlg && (num != null && num <= 0)) {
-            return false;
-        }
-
-        if (rangeFlg && num != null && (num < min || num > max)) {
-            return false;
-        }
-
-        return true;
     }
 }
