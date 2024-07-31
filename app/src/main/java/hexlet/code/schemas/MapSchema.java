@@ -16,15 +16,19 @@ public final class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
         return this;
     }
 
-    public MapSchema<K, V> shape(Map<String, BaseSchema<String>> schemaMap) {
+    public <T> MapSchema<K, V> shape(Map<String, BaseSchema<T>> schemaMap) {
         if (schemaMap == null) {
             throw new IllegalArgumentException("Schema must be non-null");
         }
 
-        schemaMap.forEach((k, v) -> addCheck(
+        addCheck(
                 "shape",
-                value -> v.isValid((String) value.getOrDefault(k, null))
-        ));
+                map -> schemaMap.entrySet().stream().allMatch(e -> {
+                    var v = map.get(e.getKey());
+                    var schema = e.getValue();
+                    return schema.isValid((T) v);
+                })
+        );
 
         return this;
     }
